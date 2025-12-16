@@ -1,0 +1,222 @@
+export const mockPets = [
+  {
+    id: 1,
+    name: "Max",
+    species: "Perro",
+    breed: "Labrador",
+    color: "Dorado",
+    size: "Grande",
+    age: "3 años",
+    gender: "Macho",
+    description: "Perro muy amigable, responde a su nombre. Le encanta jugar con pelotas y es muy cariñoso con los niños. Tiene una pequeña cicatriz en la pata delantera derecha.",
+    photos: ["https://placedog.net/500/500?id=1"],
+    lastSeenLocation: {
+      address: "Calle Principal 123",
+      city: "Ciudad de México",
+      state: "CDMX"
+    },
+    lastSeenDate: "2025-12-10",
+    reward: 500,
+    status: "lost",
+    contactPhone: "555-1234",
+    contactEmail: "owner@example.com"
+  },
+  {
+    id: 2,
+    name: "Luna",
+    species: "Gato",
+    breed: "Siamés",
+    color: "Crema con marrón",
+    size: "Pequeño",
+    age: "2 años",
+    gender: "Hembra",
+    description: "Gata muy tímida, se asusta con facilidad. Lleva un collar rosa con cascabel. Es muy cariñosa una vez que toma confianza.",
+    photos: ["https://placecats.com/500/500?id=2"],
+    lastSeenLocation: {
+      address: "Avenida Reforma 456",
+      city: "Guadalajara",
+      state: "Jalisco"
+    },
+    lastSeenDate: "2025-12-12",
+    reward: 300,
+    status: "lost",
+    contactPhone: "555-5678",
+    contactEmail: "luna.owner@example.com"
+  },
+  {
+    id: 3,
+    name: "Rocky",
+    species: "Perro",
+    breed: "Pastor Alemán",
+    color: "Negro y marrón",
+    size: "Grande",
+    age: "5 años",
+    gender: "Macho",
+    description: "Perro entrenado, obedece órdenes básicas. Es muy protector y puede mostrarse desconfiado con extraños. Lleva placa de identificación.",
+    photos: ["https://placedog.net/500/500?id=3"],
+    lastSeenLocation: {
+      address: "Parque Central",
+      city: "Monterrey",
+      state: "Nuevo León"
+    },
+    lastSeenDate: "2025-12-13",
+    reward: 1000,
+    status: "lost",
+    contactPhone: "555-9012",
+    contactEmail: "rocky@example.com"
+  },
+  {
+    id: 4,
+    name: "Bella",
+    species: "Perro",
+    breed: "Golden Retriever",
+    color: "Dorado claro",
+    size: "Grande",
+    age: "4 años",
+    gender: "Hembra",
+    description: "Perra muy sociable y juguetona. Le gusta nadar y correr en el parque. Tiene un lunar negro en el hocico.",
+    photos: ["https://placedog.net/500/500?id=4"],
+    lastSeenLocation: {
+      address: "Colonia Roma Norte",
+      city: "Ciudad de México",
+      state: "CDMX"
+    },
+    lastSeenDate: "2025-12-08",
+    reward: 750,
+    status: "found",
+    contactPhone: "555-3456",
+    contactEmail: "bella@example.com"
+  },
+  {
+    id: 5,
+    name: "Michi",
+    species: "Gato",
+    breed: "Persa",
+    color: "Blanco",
+    size: "Mediano",
+    age: "1 año",
+    gender: "Macho",
+    description: "Gato de pelo largo, muy juguetón. Le gusta estar en lugares altos y cazar insectos. Es muy limpio.",
+    photos: ["https://placecats.com/500/500?id=5"],
+    lastSeenLocation: {
+      address: "Calle Morelos 789",
+      city: "Puebla",
+      state: "Puebla"
+    },
+    lastSeenDate: "2025-12-14",
+    reward: 400,
+    status: "lost",
+    contactPhone: "555-7890",
+    contactEmail: "michi@example.com"
+  },
+  {
+    id: 6,
+    name: "Charlie",
+    species: "Perro",
+    breed: "Beagle",
+    color: "Tricolor (blanco, marrón y negro)",
+    size: "Mediano",
+    age: "6 años",
+    gender: "Macho",
+    description: "Perro cazador, tiene buen olfato. Le encanta explorar y seguir rastros. Es muy enérgico y amigable.",
+    photos: ["https://placedog.net/500/500?id=6"],
+    lastSeenLocation: {
+      address: "Bosque de Chapultepec",
+      city: "Ciudad de México",
+      state: "CDMX"
+    },
+    lastSeenDate: "2025-12-11",
+    reward: 600,
+    status: "lost",
+    contactPhone: "555-2345",
+    contactEmail: "charlie@example.com"
+  },
+  {
+    id: 7,
+    name: "Coco",
+    species: "Ave",
+    breed: "Loro Amazonas",
+    color: "Verde con rojo",
+    size: "Pequeño",
+    age: "8 años",
+    gender: "Macho",
+    description: "Loro que habla, sabe decir algunas palabras como 'hola' y 'coco'. Es muy sociable y le gusta estar con personas.",
+    photos: ["https://placehold.co/500x500/green/white?text=Loro"],
+    lastSeenLocation: {
+      address: "Colonia Del Valle",
+      city: "Ciudad de México",
+      state: "CDMX"
+    },
+    lastSeenDate: "2025-12-09",
+    reward: 800,
+    status: "lost",
+    contactPhone: "555-6789",
+    contactEmail: "coco@example.com"
+  },
+  {
+    id: 8,
+    name: "Nala",
+    species: "Gato",
+    breed: "Bengal",
+    color: "Atigrado dorado",
+    size: "Mediano",
+    age: "3 años",
+    gender: "Hembra",
+    description: "Gata muy activa y curiosa. Le gusta trepar y saltar. Tiene manchas únicas como un leopardo pequeño.",
+    photos: ["https://placecats.com/500/500?id=8"],
+    lastSeenLocation: {
+      address: "Zona Rosa",
+      city: "Ciudad de México",
+      state: "CDMX"
+    },
+    lastSeenDate: "2025-12-07",
+    reward: 900,
+    status: "found",
+    contactPhone: "555-4567",
+    contactEmail: "nala@example.com"
+  },
+  {
+    id: 9,
+    name: "Toby",
+    species: "Perro",
+    breed: "Chihuahua",
+    color: "Café",
+    size: "Pequeño",
+    age: "2 años",
+    gender: "Macho",
+    description: "Perro muy pequeño y nervioso. Le teme a los ruidos fuertes. Lleva un suéter azul con rayas blancas.",
+    photos: ["https://placedog.net/500/500?id=9"],
+    lastSeenLocation: {
+      address: "Calle Insurgentes 321",
+      city: "Querétaro",
+      state: "Querétaro"
+    },
+    lastSeenDate: "2025-12-15",
+    reward: 350,
+    status: "lost",
+    contactPhone: "555-8901",
+    contactEmail: "toby@example.com"
+  },
+  {
+    id: 10,
+    name: "Simba",
+    species: "Gato",
+    breed: "Maine Coon",
+    color: "Naranja atigrado",
+    size: "Grande",
+    age: "4 años",
+    gender: "Macho",
+    description: "Gato de gran tamaño, muy majestuoso. Es tranquilo y le gusta estar cerca de sus dueños. Tiene pelaje largo y abundante.",
+    photos: ["https://placecats.com/500/500?id=10"],
+    lastSeenLocation: {
+      address: "Avenida Universidad 555",
+      city: "Toluca",
+      state: "Estado de México"
+    },
+    lastSeenDate: "2025-12-06",
+    reward: 700,
+    status: "found",
+    contactPhone: "555-0123",
+    contactEmail: "simba@example.com"
+  }
+];
