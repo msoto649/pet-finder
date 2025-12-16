@@ -4,3 +4,5 @@ npm init -y
 
 npm install express mongoose cors dotenv bcryptjs jsonwebtoken multer cloudinary nodemailer express-validator
 npm install --save-dev nodemon
+
+ls node_modules
