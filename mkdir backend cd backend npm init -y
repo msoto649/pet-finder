@@ -1,2 +1,0 @@
-npm install express cors dotenv mongoose bcryptjs jsonwebtoken multer cloudinary nodemailer
-npm install --save-dev nodemon
