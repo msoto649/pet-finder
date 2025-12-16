@@ -1,0 +1,4 @@
+# Dentro de tu proyecto pet-finder
+mkdir backend
+cd backend
+npm init -y
