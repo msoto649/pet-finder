@@ -1,3 +1,6 @@
 mkdir -p backend/src/{controllers,models,routes,middleware,config}
 cd backend
 npm init -y
+
+npm install express mongoose cors dotenv bcryptjs jsonwebtoken multer cloudinary nodemailer express-validator
+npm install --save-dev nodemon
