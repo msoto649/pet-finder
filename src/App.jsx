@@ -4,6 +4,7 @@ import Footer from './components/common/Footer';
 import Home from './pages/Home';
 import SearchPets from './pages/SearchPets';
 import ReportPet from './pages/ReportPet';
+import PetDetail from './pages/PetDetail';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/buscar" element={<SearchPets />} />
           <Route path="/reportar" element={<ReportPet />} />
+          <Route path="/mascota/:id" element={<PetDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
