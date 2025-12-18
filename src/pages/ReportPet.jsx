@@ -1,16 +1,21 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/common/Button';
+import { createPet } from '../services/api';
 
 export default function ReportPet() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
+    name:  '',
     type: 'Perro',
-    breed:  '',
+    breed: '',
     color: '',
-    size:  'Mediano',
-    status: 'perdido',
+    age: '',
+    gender:  'Macho',
+    status: 'Perdido',
     location: '',
-    description:  '',
+    description: '',
     contactName: '',
     contactPhone: '',
     contactEmail: ''
@@ -19,14 +24,24 @@ export default function ReportPet() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e. target.value
+      [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('¡Reporte enviado!');
-    console.log('Datos del reporte:', formData);
+    
+    try {
+      setLoading(true);
+      await createPet(formData);
+      alert('¡Mascota reportada exitosamente!  🎉');
+      navigate('/buscar');
+    } catch (error) {
+      console.error('Error al reportar mascota:', error);
+      alert('Error al reportar la mascota.  Verifica que el backend esté corriendo.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,9 +56,9 @@ export default function ReportPet() {
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md space-y-6">
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Estado *</label>
-          <select name="status" value={formData.status} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
-            <option value="perdido">🔍 Perdido</option>
-            <option value="encontrado">✅ Encontrado</option>
+          <select name="status" value={formData. status} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus: outline-none focus:ring-2 focus:ring-orange-500" required>
+            <option value="Perdido">🔍 Perdido</option>
+            <option value="Encontrado">✅ Encontrado</option>
           </select>
         </div>
 
@@ -73,23 +88,27 @@ export default function ReportPet() {
             <input type="text" name="color" value={formData. color} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus: outline-none focus:ring-2 focus:ring-orange-500" required />
           </div>
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Tamaño *</label>
-            <select name="size" value={formData. size} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus: outline-none focus:ring-2 focus:ring-orange-500" required>
-              <option value="Pequeño">Pequeño</option>
-              <option value="Mediano">Mediano</option>
-              <option value="Grande">Grande</option>
-            </select>
+            <label className="block text-gray-700 font-semibold mb-2">Edad</label>
+            <input type="text" name="age" value={formData.age} onChange={handleChange} placeholder="Ej: 3 años" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
           </div>
         </div>
 
         <div>
+          <label className="block text-gray-700 font-semibold mb-2">Género *</label>
+          <select name="gender" value={formData.gender} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+          </select>
+        </div>
+
+        <div>
           <label className="block text-gray-700 font-semibold mb-2">Ubicación *</label>
-          <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Ej: Parque Central, CDMX" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required />
+          <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Ej: San Salvador, Centro" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus: ring-2 focus:ring-orange-500" required />
         </div>
 
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Descripción *</label>
-          <textarea name="description" value={formData. description} onChange={handleChange} rows="4" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required />
+          <textarea name="description" value={formData.description} onChange={handleChange} rows="4" placeholder="Describe características especiales, comportamiento, etc." className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus: ring-2 focus:ring-orange-500" required />
         </div>
 
         <div className="border-t pt-6">
@@ -97,20 +116,22 @@ export default function ReportPet() {
           <div className="space-y-4">
             <div>
               <label className="block text-gray-700 font-semibold mb-2">Nombre *</label>
-              <input type="text" name="contactName" value={formData.contactName} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus: ring-2 focus:ring-orange-500" required />
+              <input type="text" name="contactName" value={formData.contactName} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required />
             </div>
             <div>
               <label className="block text-gray-700 font-semibold mb-2">Teléfono *</label>
-              <input type="tel" name="contactPhone" value={formData.contactPhone} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required />
+              <input type="tel" name="contactPhone" value={formData.contactPhone} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus: ring-2 focus:ring-orange-500" required />
             </div>
             <div>
               <label className="block text-gray-700 font-semibold mb-2">Email *</label>
-              <input type="email" name="contactEmail" value={formData.contactEmail} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus: ring-orange-500" required />
+              <input type="email" name="contactEmail" value={formData.contactEmail} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required />
             </div>
           </div>
         </div>
 
-        <Button type="submit" className="w-full">Enviar Reporte</Button>
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading ? 'Enviando...' : 'Enviar Reporte'}
+        </Button>
       </form>
     </div>
   );

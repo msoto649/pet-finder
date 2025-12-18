@@ -1,6 +1,23 @@
 {
+  "name": "pet-finder-backend",
+  "version": "1.0.0",
+  "description": "Backend API para Pet Finder",
+  "main":  "src/server.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
+  },
+  "keywords":  ["pets", "api", "express", "mongodb"],
+  "author": "Misael Junior Soto Fuentes",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "cors": "^2.8.5",
+    "dotenv":  "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }

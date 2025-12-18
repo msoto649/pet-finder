@@ -1,63 +1,52 @@
 const mongoose = require('mongoose');
 
 const petSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose. Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
   name: {
     type: String,
-    required: true
+    required: [true, 'El nombre es requerido']
   },
-  species: {
+  type:  {
     type: String,
     enum: ['Perro', 'Gato', 'Ave', 'Otro'],
-    required: true
+    required: [true, 'El tipo de mascota es requerido']
   },
   breed: String,
   color: String,
-  size: {
-    type: String,
-    enum: ['Pequeño', 'Mediano', 'Grande']
-  },
   age: String,
   gender: {
-    type: String,
+    type:  String,
     enum: ['Macho', 'Hembra', 'Desconocido']
   },
-  description: {
+  description:  {
     type: String,
-    required: true
+    required: [true, 'La descripción es requerida']
   },
-  photos: [String],
-  lastSeenLocation: {
-    address: String,
-    city: String,
-    state: String,
-    latitude: Number,
-    longitude: Number
+  image: {
+    type: String,
+    default: 'https://via.placeholder.com/400x300? text=Pet'
+  },
+  location: {
+    type:  String,
+    required: [true, 'La ubicación es requerida']
   },
   lastSeenDate: {
     type: Date,
-    required: true
-  },
-  reward: {
-    type: Number,
-    default: 0
+    default:  Date.now
   },
   status: {
     type: String,
-    enum:  ['lost', 'found', 'reunited'],
-    default: 'lost'
+    enum: ['Perdido', 'Encontrado', 'Reunido'],
+    default: 'Perdido'
   },
-  contactPhone: String,
-  contactEmail: String,
-  contactPreference: {
+  contactName:  {
     type: String,
-    enum: ['phone', 'email', 'both'],
-    default: 'both'
-  }
+    required: [true, 'El nombre de contacto es requerido']
+  },
+  contactPhone: {
+    type: String,
+    required: [true, 'El teléfono es requerido']
+  },
+  contactEmail: String
 }, {
   timestamps: true
 });

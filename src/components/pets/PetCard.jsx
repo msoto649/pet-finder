@@ -15,16 +15,16 @@ export default function PetCard({ pet }) {
     }
   };
 
-  const config = statusConfig[pet.status];
+  const config = statusConfig[pet.status.toLowerCase()];
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <div className="relative">
         <img
-          src={pet.image}
-          alt={pet.name}
-          className="w-full h-48 object-cover"
-        />
+  src={pet.image || `https://source.unsplash.com/400x300/?${pet.type. toLowerCase()}`}
+  alt={pet.name}
+  className="w-full h-48 object-cover"
+/>
         <div className={`absolute top-2 right-2 ${config.bg} ${config.text} px-3 py-1 rounded-full text-sm font-semibold flex items-center space-x-1`}>
           <span>{config.icon}</span>
           <span className="capitalize">{pet.status}</span>
