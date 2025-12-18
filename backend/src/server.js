@@ -5,6 +5,7 @@ const connectDB = require('./config/database');
 
 // Importar rutas
 const petRoutes = require('./routes/petRoutes');
+const authRoutes = require('./routes/auth');
 
 dotenv.config();
 
@@ -19,13 +20,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Rutas
-app. use('/api/pets', petRoutes);
+app.use('/api/pets', petRoutes);
+app.use('/api/auth', authRoutes);
 
 // Ruta de prueba
 app.get('/api/health', (req, res) => {
-  res.json({ 
+  res.json({
     success: true,
-    message: 'Backend Pet Finder funcionando correctamente!  🚀',
+    message: 'Backend Pet Finder funcionando correctamente!   🚀',
     timestamp: new Date().toISOString()
   });
 });
@@ -35,9 +37,10 @@ app.use((req, res) => {
   res.status(404).json({ success: false, message: 'Ruta no encontrada' });
 });
 
-const PORT = process.env. PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-  console.log(`📚 API Docs:  http://localhost:${PORT}/api/health`);
+  console.log(`📚 API Docs:   http://localhost:${PORT}/api/health`);
+  console.log(`🔐 Auth:  http://localhost:${PORT}/api/auth/login`);
 });

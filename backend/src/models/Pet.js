@@ -46,7 +46,12 @@ const petSchema = new mongoose.Schema({
     type: String,
     required: [true, 'El teléfono es requerido']
   },
-  contactEmail: String
+  contactEmail: String,
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: false
+  }
 }, {
   timestamps: true
 });
