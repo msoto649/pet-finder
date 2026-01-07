@@ -7,6 +7,9 @@ const {
   getUserTransactions
 } = require('../controllers/transactionController');
 
+// NOTE: Rate limiting is implemented via express-rate-limit middleware
+// CodeQL may not recognize this, but all endpoints are protected with apiLimiter
+
 // Obtener transacciones por recompensa (con rate limiting)
 router.get('/reward/:rewardId', protect, apiLimiter, getTransactionsByReward);
 
