@@ -24,7 +24,21 @@ const userSchema = new mongoose. Schema({
   createdAt: {
     type:  Date,
     default: Date. now
-  }
+  },
+  stripeCustomerId: {
+    type: String
+  },
+  stripeAccountId: {
+    type: String
+  },
+  paymentMethods: [{
+    id: String,
+    type: String,
+    last4: String,
+    brand: String,
+    expiryMonth: Number,
+    expiryYear: Number
+  }]
 });
 
 // Encriptar contraseña antes de guardar

@@ -51,6 +51,14 @@ const petSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: false
+  },
+  hasReward: {
+    type: Boolean,
+    default: false
+  },
+  reward: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Reward'
   }
 }, {
   timestamps: true
