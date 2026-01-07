@@ -1,13 +1,82 @@
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { mockPets } from '../data/mockPets';
+import { Elements } from '@stripe/react-stripe-js';
 import Button from '../components/common/Button';
+import RewardBadge from '../components/rewards/RewardBadge';
+import RewardDetails from '../components/rewards/RewardDetails';
+import TransactionHistory from '../components/rewards/TransactionHistory';
+import { getPetById } from '../services/api';
+import { getRewardByPet, holdPayment } from '../services/rewardService';
+import { getStripe } from '../services/stripeService';
 
 export default function PetDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [pet, setPet] = useState(null);
+  const [reward, setReward] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [showReportFound, setShowReportFound] = useState(false);
   
-  const pet = mockPets. find(p => p.id === parseInt(id));
+  // Obtener el usuario actual del localStorage (simulado)
+  const currentUserId = localStorage.getItem('userId');
 
+  useEffect(() => {
+    loadPetDetails();
+  }, [id]);
+
+  const loadPetDetails = async () => {
+    try {
+      setLoading(true);
+      // Cargar información de la mascota
+      const petResponse = await getPetById(id);
+      setPet(petResponse.data.data);
+
+      // Si tiene recompensa, cargarla
+      if (petResponse.data.data.hasReward) {
+        try {
+          const rewardResponse = await getRewardByPet(id);
+          setReward(rewardResponse.data);
+        } catch (error) {
+          console.log('No se pudo cargar la recompensa:', error);
+        }
+      }
+    } catch (error) {
+      console.error('Error al cargar detalles:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleReportFound = async () => {
+    if (!currentUserId) {
+      alert('Debes iniciar sesión para reportar que encontraste esta mascota');
+      return;
+    }
+
+    if (!reward || reward.status !== 'pending') {
+      alert('Esta recompensa no está disponible');
+      return;
+    }
+
+    try {
+      await holdPayment(reward._id, currentUserId);
+      alert('¡Reporte enviado! El dueño será notificado. 🎉');
+      loadPetDetails();
+    } catch (error) {
+      console.error('Error al reportar:', error);
+      alert('Error al enviar el reporte');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="text-center py-20">
+        <div className="text-6xl mb-4">⏳</div>
+        <p className="text-gray-600 text-lg">Cargando detalles...</p>
+      </div>
+    );
+  }
+  
   if (!pet) {
     return (
       <div className="text-center py-20">
@@ -26,21 +95,29 @@ export default function PetDetail() {
   }
 
   const statusConfig = {
-    perdido: {
+    'Perdido': {
       bg: 'bg-red-100',
       text: 'text-red-800',
       icon: '🔍',
       label: 'Perdido'
     },
-    encontrado: {
+    'Encontrado': {
       bg: 'bg-green-100',
       text: 'text-green-800',
       icon: '✅',
       label: 'Encontrado'
+    },
+    'Reunido': {
+      bg: 'bg-blue-100',
+      text: 'text-blue-800',
+      icon: '🎉',
+      label: 'Reunido'
     }
   };
 
-  const config = statusConfig[pet.status];
+  const config = statusConfig[pet.status] || statusConfig['Perdido'];
+
+  const isOwner = currentUserId && pet.owner && pet.owner.toString() === currentUserId;
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -73,6 +150,17 @@ export default function PetDetail() {
             <p className="text-gray-600 text-lg mb-6">
               📍 {pet.location}
             </p>
+
+            {/* Mostrar badge de recompensa */}
+            {pet.hasReward && reward && (
+              <div className="mb-6">
+                <RewardBadge
+                  amount={reward.amount}
+                  currency={reward.currency}
+                  status={reward.status}
+                />
+              </div>
+            )}
 
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
@@ -144,9 +232,38 @@ export default function PetDetail() {
                 </a>
               </div>
             </div>
+
+            {/* Botón para reportar que encontró la mascota */}
+            {!isOwner && pet.status === 'Perdido' && reward && reward.status === 'pending' && (
+              <div className="mt-6">
+                <button
+                  onClick={handleReportFound}
+                  className="w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
+                >
+                  ✋ Reportar que Encontré esta Mascota
+                </button>
+                <p className="text-xs text-gray-500 text-center mt-2">
+                  Al reportar, el pago será retenido hasta que el dueño confirme
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Sección de Recompensa */}
+      {reward && (
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <RewardDetails
+            reward={reward}
+            onUpdate={loadPetDetails}
+            currentUserId={currentUserId}
+          />
+          
+          {/* Historial de transacciones */}
+          <TransactionHistory rewardId={reward._id} />
+        </div>
+      )}
     </div>
   );
 }
