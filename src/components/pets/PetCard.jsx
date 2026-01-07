@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '../common/Button';
+import RewardBadge from '../rewards/RewardBadge';
 
 export default function PetCard({ pet }) {
   const statusConfig = {
@@ -33,6 +34,13 @@ export default function PetCard({ pet }) {
 
       <div className="p-4">
         <h3 className="text-xl font-bold text-gray-800 mb-2">{pet.name}</h3>
+        
+        {/* Mostrar badge de recompensa si existe */}
+        {pet.hasReward && pet.rewardAmount && (
+          <div className="mb-3">
+            <RewardBadge amount={pet.rewardAmount} currency={pet.rewardCurrency} />
+          </div>
+        )}
         
         <div className="space-y-1 text-sm text-gray-600 mb-4">
           <p>🐾 {pet. type} - {pet.breed}</p>
