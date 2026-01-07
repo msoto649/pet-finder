@@ -5,6 +5,7 @@ import Footer from './components/common/Footer';
 import Home from './pages/Home';
 import SearchPets from './pages/SearchPets';
 import ReportPet from './pages/ReportPet';
+import Rewards from './pages/Rewards';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchPets />} />
             <Route path="/report" element={<ReportPet />} />
+            <Route path="/rewards" element={<Rewards />} />
           </Routes>
         </main>
         <Footer />

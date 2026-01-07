@@ -116,6 +116,45 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Rewards Section */}
+      <section className="py-16 bg-gradient-to-r from-amber-500 to-amber-600">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <div className="text-6xl mb-6">💰</div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Sistema de Recompensas
+            </h2>
+            <p className="text-xl mb-8 text-amber-50">
+              Gana recompensas ayudando a reunir mascotas con sus familias. 
+              Cada mascota encontrada puede tener una recompensa económica para agradecerte.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-6">
+                <div className="text-4xl font-bold mb-2">
+                  ${mockPets.filter(p => p.status === 'lost').reduce((sum, p) => sum + p.reward, 0).toLocaleString()}
+                </div>
+                <div className="text-amber-100">Recompensas Activas</div>
+              </div>
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-6">
+                <div className="text-4xl font-bold mb-2">
+                  {mockPets.filter(p => p.reward > 0).length}
+                </div>
+                <div className="text-amber-100">Mascotas con Recompensa</div>
+              </div>
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg p-6">
+                <div className="text-4xl font-bold mb-2">$2,350</div>
+                <div className="text-amber-100">Ya Pagadas</div>
+              </div>
+            </div>
+            <Link to="/rewards">
+              <Button variant="outline" className="text-lg bg-white hover:bg-amber-50 border-white text-amber-600">
+                Ver Sistema de Recompensas
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Call to Action Section */}
       <section className="py-16 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white">
         <div className="container mx-auto px-4 text-center">

@@ -27,6 +27,10 @@ const Header = () => {
             <Link to="/search" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
               Buscar Mascotas
             </Link>
+            <Link to="/rewards" className="text-gray-700 hover:text-primary-600 transition-colors font-medium flex items-center">
+              <span className="mr-1">💰</span>
+              Recompensas
+            </Link>
             <Link to="/report">
               <Button variant="primary" className="text-sm">
                 Reportar Mascota Perdida
@@ -81,6 +85,13 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Buscar Mascotas
+            </Link>
+            <Link
+              to="/rewards"
+              className="block text-gray-700 hover:text-primary-600 transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              💰 Recompensas
             </Link>
             <Link to="/report" onClick={() => setIsMenuOpen(false)}>
               <Button variant="primary" className="w-full text-sm">
