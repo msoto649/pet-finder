@@ -94,7 +94,7 @@ export default function ReportPet() {
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md space-y-6">
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Estado *</label>
-          <select name="status" value={formData. status} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus: outline-none focus:ring-2 focus:ring-orange-500" required>
+          <select name="status" value={formData.status} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
             <option value="Perdido">🔍 Perdido</option>
             <option value="Encontrado">✅ Encontrado</option>
           </select>

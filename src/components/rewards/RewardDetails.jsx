@@ -65,7 +65,7 @@ export default function RewardDetails({ reward, onUpdate, currentUserId }) {
   };
 
   const handleCancel = async () => {
-    if (!showConfirm === 'cancel') {
+    if (showConfirm !== 'cancel') {
       setShowConfirm('cancel');
       return;
     }
@@ -85,7 +85,7 @@ export default function RewardDetails({ reward, onUpdate, currentUserId }) {
   };
 
   const handleRelease = async () => {
-    if (!showConfirm === 'release') {
+    if (showConfirm !== 'release') {
       setShowConfirm('release');
       return;
     }
